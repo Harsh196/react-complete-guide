@@ -7,7 +7,7 @@ class Persons extends Component{
   //     return state;
   // }
   shouldComponentUpdate(nextProps, nextStates){
-    console.log('[Person.js] shouldComponentUpdate', nextProps, nextStates);
+    console.log('[Persons.js] shouldComponentUpdate', nextProps, nextStates);
     return true;
   }
   getSnapshotBeforeUpdate(prevProps, prevStates){
@@ -15,9 +15,11 @@ class Persons extends Component{
     return null;
   }
   componentDidUpdate(){
-    console.log('[Person.js] componentDidUpdate');
+    console.log('[Persons.js] componentDidUpdate');
   }
-  
+  componentWillUnmount(){
+    console.log('[Persons.js] componentWillUnmount');
+  }
   render(){
     console.log('[persons.js] is rendering...')
     return this.props.persons.map( (person,index) => {
