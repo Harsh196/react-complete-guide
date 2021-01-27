@@ -18,8 +18,8 @@
   color:black;
 }
 .Cockpit button.Red{
-  background-color: red;
+  background-color: #640011;
 }
 .Cockpit button.Red:hover{
-  background-color: salmon;
+  background-color: #f00c32;
 }
