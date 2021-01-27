@@ -11,8 +11,12 @@ class Person extends Component{
     super(props);
     this.inputElementRef = React.createRef(); //https://reactjs.org/docs/refs-and-the-dom.html basically gives you access to DOM element. 
   }
+  //In class based component you have to use static contextType property. 
+  static contextType = AuthContext; //This gives you access to context values in places where you have not used AuthContext component
+  
   componentDidMount(){
     this.inputElementRef.current.focus(); //https://reactjs.org/docs/refs-and-the-dom.html
+    console.log(this.context.authenticated);
   }
   render()
   {
@@ -22,11 +26,7 @@ class Person extends Component{
       //Aux component allows to have multiple adjacent elements e.g <div> because it only returns props.children refer to Aux.js
       // React.Fragment component achieves the same behavior as Aux. Fragment component is built into react 16.2 so no need to create fragment.js file. 
       <Aux>
-        <AuthContext.Consumer>
-          {context =>
-            context.authenticated?<p>authenticated</p>:<p>Please Log In</p>
-          }
-        </AuthContext.Consumer>
+        {this.context.authenticated?<p>authenticated</p>:<p>Please Log In</p>}
         <p onClick={this.props.click}>My name is {this.props.name} and I am {this.props.age} years old.</p>
         <p>{this.props.children}</p>
         <input       
@@ -39,7 +39,7 @@ class Person extends Component{
   }
 }
 
-//PropTypes is a react library which validates the props passed to the component. If the props passed to the component doesnt match the type define below it will through an error (Console error).Read more on google. 
+//https://reactjs.org/docs/typechecking-with-proptypes.html PropTypes is a react library which validates the props passed to the component. If the props passed to the component doesnt match the type define below it will through an error (Console error).Read more on google. 
 Person.propTypes ={
   click:PropTypes.func,
   name:PropTypes.string,

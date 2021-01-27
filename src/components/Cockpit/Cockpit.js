@@ -1,10 +1,14 @@
-import React,{ useEffect,useRef } from 'react';
+import React,{ useEffect,useRef,useContext } from 'react';
 import classes from './Cockpit.css';
 import AuthContext from '../../context/auth-context';
 
 const cockpit = (props) => {
   const toggleBtnRef=useRef(null);
 
+  //useContext is used for functional component. And static contextType is used for class based component. for static contextType please refer to Person.js
+  const authContext = useContext(AuthContext);
+
+  //https://reactjs.org/docs/hooks-effect.html
   useEffect(()=>{
     console.log('[Cockpit.js] useEffect');
     // setTimeout(()=>{
@@ -42,11 +46,7 @@ const cockpit = (props) => {
       onClick={props.clicked}>
       Toggle Person
       </button>
-      <AuthContext.Consumer>
-        {context=>      
-          <button onClick={context.login}>Login</button>
-        } 
-      </AuthContext.Consumer>
+      <button onClick={authContext.login}>Login</button>
     </div>
   );}
 
